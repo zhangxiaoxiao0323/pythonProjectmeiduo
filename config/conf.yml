@@ -1,0 +1,5 @@
+BASE:
+  log_level: "debug"
+  log_extension: ".log"
+  test:
+    url: "http://mp-meiduo-python.itheima.net/"
