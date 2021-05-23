@@ -10,6 +10,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(current))
 _confgi_path = BASE_DIR+os.sep+"config"
 # 定义conf.yml的绝对路径
 _confgi_file = _confgi_path+os.sep+"conf.yml"
+# 定义db_conf.yml路径
+_db_config_file = _confgi_path+os.sep+"db_conf.yml"
 # 定义logs文件的路径
 _log_path = BASE_DIR+os.sep+"logs"
 
@@ -20,6 +22,10 @@ def get_config_path():
 
 def get_config_file():
     return _confgi_file
+
+
+def get_db_config_file():
+    return get_db_config_file()
 
 
 def get_log_path():

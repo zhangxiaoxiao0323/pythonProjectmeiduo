@@ -3,6 +3,7 @@ import requests
 import json
 from utils.RequestUtil import Request
 from config.Conf import ConfigYalm
+from utils.AssertUtil import AssertUtil
 
 
 def test_zxx():
@@ -15,9 +16,13 @@ def test_zxx():
     # 使用封装的方法
     request = Request()
     r_get = request.get(url)
+    print(r_get.get('code'))
+    AssertUtil().assert_code(r_get.get("code"), 201)
     res = r_get.get("body")
     # 登陆时要传入token 使用正则表达式获取token
     token = re.findall('csrfmiddlewaretoken\" value=\"(.+?)\"', res)
+    print(token)
+
     data = {"csrfmiddlewaretoken": token[0],
             "username": "admin",
             "pwd": "admin",
