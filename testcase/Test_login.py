@@ -4,6 +4,7 @@ import json
 from utils.RequestUtil import Request
 from config.Conf import ConfigYalm
 from utils.AssertUtil import AssertUtil
+from common.Base import init_db
 
 
 def test_zxx():
@@ -17,7 +18,7 @@ def test_zxx():
     request = Request()
     r_get = request.get(url)
     print(r_get.get('code'))
-    AssertUtil().assert_code(r_get.get("code"), 201)
+    AssertUtil().assert_code(r_get.get("code"), 200)
     res = r_get.get("body")
     # 登陆时要传入token 使用正则表达式获取token
     token = re.findall('csrfmiddlewaretoken\" value=\"(.+?)\"', res)
@@ -38,7 +39,8 @@ def test_zxx():
     sessionid = re.findall('sessionid=(.+?);', header)
     cookie = "username="+username[0]+"; sessionid="+sessionid[0]
     print("----------")
-    print("登陆：cookie"+cookie)
+    print(header)
+    print("登陆：cookie: "+cookie)
     # 个人中心
     # url_info = "http://mp-meiduo-python.itheima.net/info/"
     url_info = url_path + "info/"
@@ -93,6 +95,23 @@ def test_zxx():
     res_orders = request.post(url_orders, data=json.dumps(data_orders), headers=headers_orders, allow_redirects=False)
     print("下订单")
     print(res_orders)
+
+    # 数据库断言验证
+    # 初始化数据库对象
+    conn = init_db('db_1')
+    # 查询结果
+    res_db = conn.fetchone('select name from user where id=3')
+    print(res_db)
+    # 验证
+
+    name = res_orders["body"]["errmsg"]
+    assert name == res_db['name']
+
+
+
+
+
+
 
 
 if __name__ == '__main__':

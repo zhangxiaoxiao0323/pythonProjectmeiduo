@@ -25,7 +25,7 @@ def get_config_file():
 
 
 def get_db_config_file():
-    return get_db_config_file()
+    return _db_config_file
 
 
 def get_log_path():
@@ -38,6 +38,8 @@ class ConfigYalm:
     def __init__(self):
         self.config = YamlReader(get_config_file()).data()
 
+        self.db_config = YamlReader(get_db_config_file()).data()
+
     def get_conf_url(self):
         return self.config[0]["BASE"]["test"]["url"]
 
@@ -47,10 +49,15 @@ class ConfigYalm:
     def get_conf_log_extension(self):
         return self.config[0]["BASE"]["log_extension"]
 
+    def get_db_conf_info(self, db_alias):
+        return self.db_config[0][db_alias]
+
 
 if __name__ == '__main__':
     conf_read = ConfigYalm()
-    print(conf_read.get_conf_url())
-    print(conf_read.get_conf_log())
-    print(conf_read.get_conf_log_extension())
-    print(_log_path)
+    # print(conf_read.get_conf_url())
+    # print(conf_read.get_conf_log())
+    # print(conf_read.get_conf_log_extension())
+    # print(_log_path)
+    print(conf_read.get_db_conf_info('db_1'))
+    print(conf_read.get_db_conf_info('db_2'))

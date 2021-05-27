@@ -1,7 +1,16 @@
+
 db_1:
-  host: '192.168.3.126'
-  user: '',
-  password: '',
-  database: '',
-  charset: 'utf-8',
-  port: '8080'
+  db_host: "127.0.0.1"
+  db_user: "root"
+  db_password: "root"
+  db_database: "python_test"
+  db_charset: "utf8"
+  db_port: "3306"
+
+db_2:
+  db_host: "127.0.0.1"
+  db_user: "root"
+  db_password: "root"
+  db_database: "python_test"
+  db_charset: "utf8"
+  db_port: "3307"

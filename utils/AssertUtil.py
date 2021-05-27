@@ -36,6 +36,16 @@ class AssertUtil:
             self.log.error('not in body or body error,body is s%,expected_body is s%'%(body, expected_body))
             raise
 
+    # header 包含
+    def assert_in_header(self, header, expected_header):
+        try:
+            header = json.dump(header)
+            assert expected_header in header
+            return True
+        except:
+            self.log.error('not in header or header error,header is s%,expected_header is s%'%(header, expected_header))
+            raise
+
 
 
 
